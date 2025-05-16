@@ -8,8 +8,6 @@ We're looking for clean code, clear thinking, and effective communication of you
 ---
 
 ## Setup Instructions
--create venv: python -m venv .venv
-              .venv\Scripts\Activate.ps1
 
 ### Requirements
 - Python 3.11+
