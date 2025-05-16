@@ -6,7 +6,7 @@ from app.models import Item, ItemCreate, ItemUpdate
 app = FastAPI()
 
 
-@app.get("/heath")
+@app.get("/health") # <-- mistake was here "heath"
 def health_check() -> dict[str, str]:
     return {"status": "ok"}
 
