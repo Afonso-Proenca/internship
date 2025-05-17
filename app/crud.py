@@ -16,6 +16,17 @@ def create_item(item: ItemCreate) -> Item:
 
 
 def update_item_by_id(item_id: int, update: ItemUpdate) -> Item | None:
+
+ # check if duplication happened
+    if update.name:
+        if any(
+            i["name"].lower() == update.name.lower() and i["id"] != item_id
+            for i in items_db
+        ):
+            raise HTTPException(status_code=400, detail="Duplicate item name")
+
+    # apply changes
+
     for item in items_db:
         if item["id"] == item_id:
             if update.name:
@@ -24,3 +35,7 @@ def update_item_by_id(item_id: int, update: ItemUpdate) -> Item | None:
                 item["price"] = update.price
             return Item(**item)
     return None
+
+
+
+
