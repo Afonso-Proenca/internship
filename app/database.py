@@ -41,7 +41,7 @@ def remove_sorted(item: dict) -> None:
     re-insert it (see update flow).
     """
     # Locate by matching both price and identity
-    # if prices repeat, this ensures the correct dict is removed)
+    # if prices repeat, this ensures the correct dict is removed
 
     for idx, existing in enumerate(items_by_price):
         if existing["id"] == item["id"]:
