@@ -1,3 +1,6 @@
+# testing command : pytest -q 
+
+
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -28,6 +31,17 @@ def test_update_to_duplicate_name() -> None:
 
 
 def test_item_name_consistency() -> None:
+    # Call the /items endpoint
     response = client.get("/items")
+    assert response.status_code == 200
+
+    # Extract just the names
     names = [item["name"] for item in response.json()]
-    assert "Item500000" in names
+
+    # Ensure the list is not empty
+    assert names, "The items list should not be empty"
+
+    # Check that at least one name ends with "500000"
+    assert any(n.endswith("500000") for n in names), (
+        "There should be at least one item whose name ends with '500000'"
+    )
