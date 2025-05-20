@@ -5,8 +5,9 @@ from app.models import Item, ItemCreate, ItemUpdate
 
 app = FastAPI()
 
+#task 1 - There is a typo in one of the route path
 
-@app.get("/health") # <-- mistake was here "heath"
+@app.get("/health") # <-- mistake was here "heath" 
 def health_check() -> dict[str, str]:
     return {"status": "ok"}
 

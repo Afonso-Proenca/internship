@@ -7,9 +7,10 @@ from app.models import Item, ItemCreate, ItemUpdate
 
 from bisect import bisect_left
 
+ # task 2 - The /items endpoint does not behave correctly when filtering by min_price. Investigate and fix the logic.
 
 def get_items(min_price: float = 0.0) -> List[Item]:
-    return [Item(**item) for item in items_db if item["price"] >= min_price] # change <= for >=
+    return [Item(**item) for item in items_db if item["price"] >= min_price] # change <= for >=   
 
 
 def create_item(item: ItemCreate) -> Item:
@@ -19,17 +20,19 @@ def create_item(item: ItemCreate) -> Item:
     return Item(**new_item)
 
 
+# task 5 done There is an edge case involving duplicate item names when updating an item. This case is not properly handled and could cause inconsistencies.
+
 def update_item_by_id(item_id: int, update: ItemUpdate) -> Item | None:
 
- # check if duplication happened
+ # check if duplication happened          
     if update.name:
         if any(
             i["name"].lower() == update.name.lower() and i["id"] != item_id
             for i in items_db
         ):
             raise HTTPException(status_code=400, detail="Duplicate item name")
-
-    # apply changes
+ 
+    # apply changes                                
 
     for item in items_db:
         if item["id"] == item_id:

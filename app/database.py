@@ -8,6 +8,8 @@ with path.open("r") as f:
     items_db = json.load(f)
 
 
+# task 4 - The /items endpoint exhibits performance issues as the item list grows. Consider the current implementation and propose improvements.
+
 # Build a secondary in-memory index ordered by price
 
 

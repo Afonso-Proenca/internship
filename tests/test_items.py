@@ -1,4 +1,4 @@
-# testing command : pytest -q 
+# testing command : python -m pytest -q
 
 
 from fastapi.testclient import TestClient
@@ -30,8 +30,13 @@ def test_update_to_duplicate_name() -> None:
     assert resp.status_code == 400 or resp.status_code == 422
 
 
+# task 6 One test assumes a specific item exists in the large dataset. This creates fragility and reflects poor test design. Improve the test to ensure robustness without relying on hardcoded assumptions.
+
+
 def test_item_name_consistency() -> None:
-    # Call the /items endpoint
+
+    # Call the /items endpoint                        
+
     response = client.get("/items")
     assert response.status_code == 200
 
