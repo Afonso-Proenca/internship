@@ -1,7 +1,11 @@
 from typing import List
+from fastapi import HTTPException
+
 
 from app.database import items_db
 from app.models import Item, ItemCreate, ItemUpdate
+
+from bisect import bisect_left
 
 
 def get_items(min_price: float = 0.0) -> List[Item]:
